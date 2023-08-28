@@ -1,5 +1,5 @@
 <?php
-    class User{
+    class UserModels{ //reresenta informacion de usuario
         public $name;
         public $lastName;
         public $email;
@@ -19,8 +19,8 @@
             return $this->password;
         }
 
-        public function allCustomers(){
-            echo "All Cusomers";
+        public function allCustomers(){ //metodo para consultar en la DB
+            return 'All Cusomers' ;
         }
     }
 ?>

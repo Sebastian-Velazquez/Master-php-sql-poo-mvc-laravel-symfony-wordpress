@@ -9,8 +9,9 @@
     echo"<tr>";//inicio 2
         for ($i=1; $i <= 10; $i++) { 
             echo "<td>";
-                echo "Hola";
-            echo "</td>";
+                for ($x=0; $x <= 10; $x++) { 
+                    echo "$i x $x = ".($i*$x)."<br/>";
+                }
         }
     echo"</tr>";//fin 2
     echo "</table>";

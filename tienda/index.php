@@ -1,74 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    // Carga las clases automáticamente
+    require_once 'autoload.php';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tnda de camisetas</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
+    // Comprueba si se proporciona el parámetro 'controller' en la URL
+    if(isset($_GET['controller'])){
+        // Crea el nombre del controlador añadiendo 'Controller' al valor del parámetro 'controller'
+        $nombre_controlador = $_GET['controller'].'Controller';
+    }else {
+        echo 'La página que buscas no existe';
+        // Finaliza el script, esto se ejecuta independientemente de la condición anterior
+        exit();
+    }
 
-<body>
-    <div id="container">
-        <header id="header">
-            <div id="logo">
-                <img src="assets/img/camiseta.png" alt="Camiseta Logo">
-                <a href="index-pphp">
-                    Tienda de camisetas
-                </a>
-            </div>
-        </header>
-        <div id="menu">
-            <ul>
-                <li>
-                    <a href="#">Inicio</a>
-                </li>
-                <li>
-                    <a href="#">Categria 1</a>
-                </li>
-                <li>
-                    <a href="#">Categria 2</a>
-                </li>
-                <li>
-                    <a href="#">Categria 3</a>
-                </li>
-                <li>
-                    <a href="#">Categria 4</a>
-                </li>
-                <li>
-                    <a href="#">Categria 5</a>
-                </li>
-            </ul>
-        </div>
-        <div id="content">
-            <!-- barra lateral -->
-            <aside id="lateral">
-                <div id="login" class="block_aside">
-                    <form action="#" method="post">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" id="">
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" id="">
-                        <input type="submit" value="Enviar">
-                    </form>
-                    <a href="#">Mis pedidos</a>
-                    <a href="#">Gestionar pedidos</a>
-                    <a href="#">Gestionar categorias</a>
-                </div>
-            </aside>
-        </div>
-        <div id="central">
-            <div class="product">
-                <img src="assets/img/camiseta.png" alt="imgen produto">
-                <h2>Camiseta Axul Ancha</h2>
-                <p>30 euros</p>
-                <a href="#">Comprar</a>
-            </div>
-        </div>
-        <footer>
-            <p>Desarrollado por Sebastian Velazquez</p>
-        </footer>
-    </div>
-</body>
+    // Comprueba si la clase del controlador existe
+    if(class_exists($nombre_controlador)){
+        // Crea una instancia del controlador
+        $controlador = new $nombre_controlador();
 
-</html>
+        // Comprueba si se proporciona el parámetro 'action' en la URL
+        // y si el método correspondiente existe en el controlador
+        if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
+            // Obtiene el nombre de la acción y lo almacena en la variable 'action'
+            $action = $_GET['action'];
+            // Llama al método correspondiente en el controlador
+            $controlador->$action();
+        }else {
+            // Muestra un mensaje de error si no se proporciona la acción correcta
+            echo 'La página que buscas no existe';
+        }
+    }else{
+        // Muestra un mensaje de error si la clase del controlador no existe
+        echo 'La página que buscas no existe';
+        //exit();
+    }
+?>

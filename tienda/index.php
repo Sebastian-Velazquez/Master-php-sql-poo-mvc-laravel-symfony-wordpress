@@ -1,6 +1,9 @@
 <?php
     // Carga las clases automáticamente
     require_once 'autoload.php';
+    require_once 'views/layour-partial/header.php';
+    require_once 'views/layour-partial/sidebar.php';
+
 
     // Comprueba si se proporciona el parámetro 'controller' en la URL
     if(isset($_GET['controller'])){
@@ -33,4 +36,6 @@
         echo 'La página que buscas no existe';
         //exit();
     }
-?>
+
+
+require_once 'views/layour-partial/footer.php';

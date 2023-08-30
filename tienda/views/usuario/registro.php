@@ -1,6 +1,13 @@
 <h1>Registrarse</h1>
 
-<form action="index.php?controller=usuario&action=save" method="post">
+<?php
+    if(isset($_SESSION['register']) && $_SESSION['register']) : ?> <!-- es un if pora vistas -->
+        <strong>Resgistro completado correctamente</strong>
+    <?php else: ?> <!-- este else: es un if comun pero especial para vistas -->
+        <strong>Resgistro fallido!!</strong>
+    <?php endif ?> <!-- este endif es un if comun pero especial para vistas -->
+
+<form action="<?= base_url ?>usuario/save" method="post">
     <label for="">Nombre</label>
     <input type="text" name="nombre" id="">
 

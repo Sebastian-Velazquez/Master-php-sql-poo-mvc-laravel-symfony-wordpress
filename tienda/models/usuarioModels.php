@@ -1,8 +1,8 @@
 <?php
-
+//una clase es como un modelo que describe cómo se verá y qué hará un objeto en tu programa.
 class UsuarioModels{
-    private $id;
-    private $nombre;
+    private $id; // private, estás asegurando que solo los métodos dentro de la misma clase pueden acceder o modificar esa propiedad.
+    private $nombre;//el uso de visibilidad puede ser: (como private, protected y public)
     private $apellido;
     private $email;
     private $password;
@@ -10,13 +10,15 @@ class UsuarioModels{
     private $imagen;
 
     //conexión DB
-    private $db = Database::connect();
+    private $db;
     public function __construct(){
-        $this->db==Database::connect();
+        $this->db = Database::connect();// Aquí se establece la conexión a la base de datos
     }
 
+     // Métodos para obtener valores de los atributos
+    // (Getters)
     function getId(){
-        return $this->id;
+        return $this->id;//es parecido a unsa this.id en node js
     }
     function getNombre(){
         return $this->nombre;
@@ -28,7 +30,7 @@ class UsuarioModels{
         return $this->email;
     }
     function getPassword(){
-        return $this->password;
+        return $this->password ;
     }
     function getRol(){
         return $this->rol;
@@ -41,16 +43,16 @@ class UsuarioModels{
         $this->id  = $id;
     }
     function setNombre($nombre){
-        $this->nombre  = $nombre;
+        $this->nombre  = $this->db->real_escape_string($nombre);//real_escape_string: se utiliza para prevenir ateques usando el ` para agregar o cambiar la sentencia de sql
     }
     function setApellido($apellido){
-        $this->apellido  = $apellido;
+        $this->apellido  = $this->db->real_escape_string($apellido);
     }
     function setEmail($email){
-        $this->email  = $email;
+        $this->email  = $this->db->real_escape_string($email);
     }
     function setPassword($password){
-        $this->password  = $password;
+        $this->password  = password_hash( $this->db->real_escape_string($password), PASSWORD_BCRYPT, ['cost'=>4] ) ;
     }
     function setRol($rol){
         $this->rol  = $rol;
@@ -65,17 +67,16 @@ class UsuarioModels{
                     NULL,    
                     '{$this->getNombre()}',
                     '{$this->getApellido()}',
-                    '{$this->getApellido()}',
                     '{$this->getEmail()}',
                     '{$this->getPassword()}',
                     'user',
-                    '{$this->getImagen()}',
+                    'NULL'
                     )";
         $save = $this->db->query($sql);
-        $resultado =false;
+        $result =false;
         if($save){
-            $resultado = true;
+            $result = true;
         }
-        return $resultado;
+        return $result;
     }
 }

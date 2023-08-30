@@ -1,5 +1,6 @@
 <?php
     // Carga las clases automáticamente
+    session_start();//se pone cuando tenes echo el registro. sae debe iniciar para que no arroje erroes. validacion
     require_once 'autoload.php';
     require_once 'config/db.php';
     require_once 'config/parameters.php';//parametro base de localhost

@@ -1,6 +1,7 @@
 <?php
     // Carga las clases automáticamente
     require_once 'autoload.php';
+    require_once 'config/db.php';
     require_once 'config/parameters.php';//parametro base de localhost
     require_once 'views/layour-partial/header.php';
     require_once 'views/layour-partial/sidebar.php';

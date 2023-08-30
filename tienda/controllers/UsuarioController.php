@@ -1,4 +1,6 @@
 <?php
+//Cargar modelo de usuarioRegistro
+require_once'models/usuariomodels.php';
 // Define la clase del controlador
 class usuarioController{
     // Método para la acción 'index'
@@ -15,7 +17,8 @@ class usuarioController{
     //registro de uusuario
     public function save(){
         if(isset($_POST['formRegistro'])){
-            var_dump($_POST);//para ver los fatos como si fuera un console.log de node
+            //var_dump($_POST);//para ver los fatos como si fuera un console.log de node
+            $usuario = new UsuarioModels();
         }else {
             echo "ACCION DENEGADA";
         }

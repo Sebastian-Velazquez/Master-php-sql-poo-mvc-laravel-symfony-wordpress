@@ -1,0 +1,14 @@
+<ifModule mod_rewrite.c>
+#activar rewrite  # Activa el motor de reescritura
+RewriteEngine on
+# Página personalizada para errores 404
+ErrorDocument 404 http://localhost/curso/tienda/error/
+
+# Condiciones: No aplicar reescritura si es un directorio existente
+RewriteCond %{SCRIPT_FILENAME} !-d
+# Condiciones: No aplicar reescritura si es un archivo existente
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+# Regla de reescritura: convierte algo/algo en parámetros para index.php
+RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
+</ifModule>

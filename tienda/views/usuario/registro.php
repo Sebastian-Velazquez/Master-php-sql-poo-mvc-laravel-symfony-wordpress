@@ -1,11 +1,14 @@
 <h1>Registrarse</h1>
 
 <?php
-    if(isset($_SESSION['register']) && $_SESSION['register']) : ?> <!-- es un if pora vistas -->
-        <strong>Resgistro completado correctamente</strong>
-    <?php else: ?> <!-- este else: es un if comun pero especial para vistas -->
-        <strong>Resgistro fallido!!</strong>
+    if(isset($_SESSION['register']) && $_SESSION['register'] == 'complete') : ?> <!-- es un if pora vistas -->
+        <strong class="alert_green">Resgistro completado correctamente</strong>
+    <?php elseif (isset($_SESSION['register']) && $_SESSION['register'] == 'failed') : ?> <!-- este else: es un if comun pero especial para vistas -->
+        <strong class="alert_red">Resgistro fallido! Introduce bien los datos</strong>
     <?php endif ?> <!-- este endif es un if comun pero especial para vistas -->
+
+    <!-- Borrar session -->
+    <?php Utils::deleteSession('register'); ?>
 
 <form action="<?= base_url ?>usuario/save" method="post">
     <label for="">Nombre</label>

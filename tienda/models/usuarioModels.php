@@ -61,7 +61,7 @@ class UsuarioModels{
         $this->imagen  = $imagen;
     }
 
-    public function save(){
+    public function save(){//carga de los datos que vienen por el form
         $sql = "INSERT INTO usuarios 
                 VALUES(
                     NULL,    

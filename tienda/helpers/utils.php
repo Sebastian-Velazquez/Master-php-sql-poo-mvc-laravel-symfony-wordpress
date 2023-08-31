@@ -9,4 +9,12 @@ class Utils{
         }
         return $name;
     }
+
+    public static function isAndmin(){
+        if(!isset($_SESSION['admin'])){
+            header("location:".base_url);
+        }else{
+            return true;
+        }
+    }
 }

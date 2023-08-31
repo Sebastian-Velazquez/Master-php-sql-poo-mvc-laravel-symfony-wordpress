@@ -1,6 +1,6 @@
 <?php 
 //Cargar modelo de usuarioRegistro
-require_once'models/usuarioModels.php';
+require_once 'models/usuarioModels.php';
 // Define la clase del controlador
 class usuarioController{
     // Método para la acción 'index'

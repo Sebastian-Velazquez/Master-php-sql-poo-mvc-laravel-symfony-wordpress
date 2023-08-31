@@ -10,12 +10,14 @@
                             <input type="password" name="password" id="">
                             <input type="submit" value="Enviar">
                         </form>
+                        
                     <?php else: ?>
                         <h3><?= $_SESSION['identity']->nombre ?> <?= $_SESSION['identity']->apellidos ?></h3>
                     <?php endif; ?>
                     <ul>
+                    
                         <?php if(isset($_SESSION['admin'])) :?>
-                            <li><a href="#">Gestionar categorias</a></li>
+                            <li><a href="<?= base_url?>categoria/index">Gestionar categorias</a></li>
                             <li><a href="#">Gestionar productos</a></li>
                             <li><a href="#">Gestionar pedidos</a></li>
                         <?php endif; ?>
@@ -23,6 +25,8 @@
                         <?php if(isset($_SESSION['identity'])) :?>
                             <li><a href="#">Mis pedidos</a></li>
                             <li><a href="<?= base_url ?>usuario/logout">Cerrar sesión</a></li>
+                        <?php else: ?>
+                            <li><a href="<?= base_url ?>usuario/registro">Registrate aquí</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>

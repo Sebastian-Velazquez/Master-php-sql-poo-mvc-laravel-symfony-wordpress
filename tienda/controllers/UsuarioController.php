@@ -1,4 +1,4 @@
-<?php
+<?php 
 //Cargar modelo de usuarioRegistro
 require_once'models/usuarioModels.php';
 // Define la clase del controlador
@@ -19,7 +19,7 @@ class usuarioController{
         if(isset($_POST)){
             //var_dump($_POST);
             //exit();
-            //Validaciones.. PONER MAS VALIDACIONES EN EL PROYECTO ANTERIOR:: VER!!!!!!!!!!!!!!!!!!!!!!!! Adatar!
+            //Validaciones.. PONER MAS VALIDACIONES EN EL PROYECTO ANTERIOR:: VER!!!!!!!!!!!!!!!!!!!!!!!! Adaptar!
             $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false; //if ternario
             $apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
             $email = isset($_POST['email']) ? $_POST['email'] : false;
@@ -49,5 +49,41 @@ class usuarioController{
             $_SESSION['register'] = "failed";
         }
         header("Location:".base_url.'usuario/registro');
+    }
+
+    public function login(){
+        if (isset($_POST)){
+            //identificar el usuario
+            //consulta a la bd
+            $usuario = new UsuarioModels();
+            $usuario->setEmail($_POST['email']);
+            $usuario->setPassword($_POST['password']);
+
+            $identity = $usuario->login();
+            /* var_dump($identity);
+            die(); */
+            //para mantener al usuario identificado
+            if ($identity && is_object($identity)) {
+                $_SESSION['identity'] = $identity;
+
+                if($identity->rol == 'admin'){
+                    $_SESSION['admin'] = true;
+                }
+            }else{
+                $_SESSION['error_login'] = 'Identificación fallida!!';
+            }
+        }
+        header("location:".base_url);
+    }
+
+    //Cerrar session
+    public function logout(){
+        if(isset($_SESSION['identity'])){
+            unset($_SESSION['identity']);
+        }
+        if(isset($_SESSION['admin'])){
+            unset($_SESSION['admin']);
+        }
+        header("Location".base_url);
     }
 } 

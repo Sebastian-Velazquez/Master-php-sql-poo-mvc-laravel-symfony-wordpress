@@ -42,6 +42,20 @@ class productoController{
                 $producto->setStock($stock);
                 $producto->setCategoria_id($categoria);
                 
+                //Guardar la imagen
+                $file = $_FILES['imagen'];//imagen que viene del formulario
+                $filename = $file['name'];
+                $mimetype = $file['type']; //tipo de dato so jpg, png, pdf etc
+
+                if($mimetype == 'image/jpg' || $mimetype== 'image/jpeg' || $mimetype== 'image/png'||  $mimetype== 'image/gif'){
+                    if(!is_dir('uploads/images')){
+                        mkdir('uploads/images', 0777, true);
+                    }
+                    $producto->setImagen($filename);
+                    move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
+                }
+
+                //Guadar en DV
                 $save = $producto->save();
                 if($save){
                     $_SESSION['producto'] = "complete";
@@ -54,6 +68,37 @@ class productoController{
         }else{
             $_SESSION['producto'] = "failed";
         }
+        header('Location:'.base_url.'producto/gestion');
+    }
+
+    public function editar(){
+        //var_dump($_GET);
+        Utils::isAndmin();
+
+    }
+    public function eliminar(){
+        //var_dump($_GET);
+        Utils::isAndmin();
+
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $producto = new ProductoModels();
+            $producto->setId($id);
+
+            //$consulta = $producto->consulta();
+
+            $delete = $producto->delete();
+            if($delete){
+                $_SESSION['delete'] = 'complete';
+                //eliminar imagen
+
+            }else{
+                $_SESSION['delete'] = 'failed';
+            }
+        }else{
+            $_SESSION['delete'] = 'failed';
+        }
+
         header('Location:'.base_url.'producto/gestion');
     }
 } 

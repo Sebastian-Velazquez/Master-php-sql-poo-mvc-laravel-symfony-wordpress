@@ -89,7 +89,7 @@ class ProductoModels{
                     {$this->getStock()}, 
                     NULL,
                     CURDATE(),
-                    'NULL'
+                    '{$this->getImagen()}'
                     )"; // {$this->getStock()},  no va en comillas porque es un numero
         $save = $this->db->query($sql);
         
@@ -100,6 +100,21 @@ class ProductoModels{
 
         $result =false;
         if($save){
+            $result = true;
+        }
+        return $result;
+    }
+
+    public function delete(){
+        $sql = "DELETE FROM productos WHERE id={$this->id}";
+
+        //$sqlConsulta = "SELECT * FROM productos WHERE id={$this->id}";
+        //$consultaImagen = $this->db->query($sqlConsulta);
+
+        $delete = $this->db->query($sql);
+
+        $result =false;
+        if($delete){
             $result = true;
         }
         return $result;

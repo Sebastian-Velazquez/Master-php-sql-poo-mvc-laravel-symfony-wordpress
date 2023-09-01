@@ -26,7 +26,7 @@ class ProductoModels{
     function getNombre(){
         return $this->nombre;//es parecido a unsa this.id en node js
     }
-    function getDescipcion(){
+    function getDescripcion(){
         return $this->descripcion;//es parecido a unsa this.id en node js
     }
     function getPrecio(){
@@ -52,19 +52,19 @@ class ProductoModels{
         $this->categoria_id  = $categoria_id;
     }
     function setNombre($nombre){
-        $this->nombre  = $nombre;
+        $this->nombre  = $this->db->real_escape_string($nombre);
     }
     function setDescipcion($descripcion){
-        $this->descripcion  = $descripcion;
+        $this->descripcion  = $this->db->real_escape_string($descripcion);
     }
     function setPrecio($precio){
-        $this->precio  = $precio;
+        $this->precio  = $this->db->real_escape_string($precio);
     }
     function setStock($stock){
-        $this->stock  = $stock;
+        $this->stock  = $this->db->real_escape_string($stock);
     }
     function setOferta($oferta){
-        $this->oferta  = $oferta;
+        $this->oferta  = $this->db->real_escape_string($oferta);
     }
     function setFecha($fecha){
         $this->fecha  = $fecha;
@@ -76,5 +76,32 @@ class ProductoModels{
     public function getAll(){
         $productos = $this->db->query("SELECT * FROM productos ORDER BY id DESC");
         return $productos;
+    }
+
+    public function save(){//carga de los datos que vienen por el form
+        $sql = "INSERT INTO productos 
+                VALUES(
+                    NULL,    
+                    {$this->getCategoria_id()},
+                    '{$this->getNombre()}',
+                    '{$this->getDescripcion()}',
+                    {$this->getprecio()},
+                    {$this->getStock()}, 
+                    NULL,
+                    CURDATE(),
+                    'NULL'
+                    )"; // {$this->getStock()},  no va en comillas porque es un numero
+        $save = $this->db->query($sql);
+        
+        /* echo $sql;
+        echo "<br/>";
+        echo $this->db->error;
+        die(); */
+
+        $result =false;
+        if($save){
+            $result = true;
+        }
+        return $result;
     }
 }

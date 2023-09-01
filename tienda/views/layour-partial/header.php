@@ -18,26 +18,18 @@
                 </a>
             </div>
         </div>
+        <!-- MENU -->
+        <?php $categorias = Utils::showCategorias(); ?>
         <div id="menu">
             <ul>
                 <li>
                     <a href="#">Inicio</a>
                 </li>
-                <li>
-                    <a href="#">Categria 1</a>
-                </li>
-                <li>
-                    <a href="#">Categria 2</a>
-                </li>
-                <li>
-                    <a href="#">Categria 3</a>
-                </li>
-                <li>
-                    <a href="#">Categria 4</a>
-                </li>
-                <li>
-                    <a href="#">Categria 5</a>
-                </li>
+                <?php while($cat = $categorias->fetch_object()) : ?> <!-- esto es como un forEach en javascript -->
+                    <li>
+                        <a href="#"><?= $cat->nombre ?></a>
+                    </li>
+                <?php endwhile ?>
             </ul>
         </div>
         <div id="content">

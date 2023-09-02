@@ -108,6 +108,30 @@ class ProductoModels{
         }
         return $result;
     }
+    public function edit(){//carga de los datos que vienen por el form
+        $sql = "UPDATE productos SET
+                nombre='{$this->getNombre()}',
+                desctipcion='{$this->getDescripcion()}',
+                precio= {$this->getprecio()},
+                stock= {$this->getStock()}" ;
+        if ($this->getImagen() != null){
+            $sql .= ", imagen'{$this->getImagen()}'"; //.= concatena el codigo, agrega string a lo ultimo si odificar lo que tenia
+        }
+        $sql .= " WHERE id={$this->getId()}";
+
+        $save = $this->db->query($sql);
+        
+        /* echo $sql;
+        echo "<br/>";
+        echo $this->db->error;
+        die(); */
+
+        $result =false;
+        if($save){
+            $result = true;
+        }
+        return $result;
+    }
     public function consultarImagen(){
         $sql = "SELECT imagen FROM productos WHERE id={$this->id}";
         $consultaImagen = $this->db->query($sql);

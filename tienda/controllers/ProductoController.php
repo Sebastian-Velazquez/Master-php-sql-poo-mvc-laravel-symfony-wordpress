@@ -42,20 +42,28 @@ class productoController{
                 $producto->setCategoria_id($categoria);
                 
                 //Guardar la imagen
-                $file = $_FILES['imagen'];//imagen que viene del formulario
-                $filename = $file['name'];
-                $mimetype = $file['type']; //tipo de dato so jpg, png, pdf etc
+                if(isset($_FILES['imagen'])){//validacion
+                    $file = $_FILES['imagen'];//imagen que viene del formulario
+                    $filename = $file['name'];
+                    $mimetype = $file['type']; //tipo de dato so jpg, png, pdf etc
 
-                if($mimetype == 'image/jpg' || $mimetype== 'image/jpeg' || $mimetype== 'image/png'||  $mimetype== 'image/gif'){
-                    if(!is_dir('uploads/images')){
-                        mkdir('uploads/images', 0777, true);
+                    if($mimetype == 'image/jpg' || $mimetype== 'image/jpeg' || $mimetype== 'image/png'||  $mimetype== 'image/gif'){
+                        if(!is_dir('uploads/images')){
+                            mkdir('uploads/images', 0777, true);
+                        }
+                        $producto->setImagen($filename);
+                        move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
                     }
-                    $producto->setImagen($filename);
-                    move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
                 }
-
-                //Guadar en DV
-                $save = $producto->save();
+                if(isset($_GET['id'])){
+                    //editar y guardar en db
+                    $id = $_GET['id'];
+                    $producto->setId($id);
+                    $save = $producto->edit();
+                }else{
+                    //Guadar en DB
+                    $save = $producto->save();
+                }
                 if($save){
                     $_SESSION['producto'] = "complete";
                 }else{

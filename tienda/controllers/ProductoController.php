@@ -60,6 +60,13 @@ class productoController{
                     $id = $_GET['id'];
                     $producto->setId($id);
                     $save = $producto->edit();
+                    //para buscar el nombre y ruta del archivo que quiero borrar.  se cambio la foto pero ahora se borra el anterior
+                    //Tamben hay que cambiar los nombre para que no se repita. Sugiero ponerle feca y hora al final del nombre
+                    /* $consulta =  mysqli_fetch_assoc($producto->consultarImagen());//mysqli_fetch_assoc depuera la consulta 
+                    $rutaArchivo = "uploads/images/" . $consulta['imagen'] ;
+                    if (file_exists($rutaArchivo)) {
+                        unlink($rutaArchivo);
+                    } */
                 }else{
                     //Guadar en DB
                     $save = $producto->save();

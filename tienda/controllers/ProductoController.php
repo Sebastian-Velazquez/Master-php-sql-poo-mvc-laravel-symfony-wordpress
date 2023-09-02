@@ -17,7 +17,6 @@ class productoController{
     }
 
     public function crear(){
-
         Utils::isAndmin();//este esta la carpeta helpers. Es una funcion que verifica si sos usuario admin
         require_once 'views/producto/crear.php';
     }
@@ -74,7 +73,19 @@ class productoController{
     public function editar(){
         //var_dump($_GET);
         Utils::isAndmin();
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $edit= true;
 
+            $producto = new ProductoModels();
+            $producto->setId($id);
+
+            $pro = $producto->getOne();
+
+            require_once 'views/producto/crear.php';
+        }else{
+            header('Location:'.base_url.'producto/gestion');
+        }
     }
     public function eliminar(){
         //var_dump($_GET);
@@ -82,18 +93,26 @@ class productoController{
 
         if(isset($_GET['id'])){
             $id = $_GET['id'];
+            //Para tomar el dato que quiero borrar
             $producto = new ProductoModels();
             $producto->setId($id);
-
-            //$consulta = $producto->consulta();
-
+            //para buscar el nombre y ruta del archivo que quiero borrar
+            $consulta =  mysqli_fetch_assoc($producto->consultarImagen());//mysqli_fetch_assoc depuera la consulta 
+            $rutaArchivo = "uploads/images/" . $consulta['imagen'] ;
+            
+            //var_dump($rutaArchivo);
+            //print_r($rutaArchivo); 
+            //exit();
             $delete = $producto->delete();
             if($delete){
-                $_SESSION['delete'] = 'complete';
                 //eliminar imagen
-
-            }else{
+                if (file_exists($rutaArchivo)) {
+                    unlink($rutaArchivo);
+                }
+                $_SESSION['delete'] = 'complete';
+            }else{  
                 $_SESSION['delete'] = 'failed';
+                //$producto->consulta
             }
         }else{
             $_SESSION['delete'] = 'failed';

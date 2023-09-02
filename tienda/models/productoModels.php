@@ -77,6 +77,10 @@ class ProductoModels{
         $productos = $this->db->query("SELECT * FROM productos ORDER BY id DESC");
         return $productos;
     }
+        public function getOne(){
+        $producto = $this->db->query("SELECT * FROM productos WHERE id={$this->getId()}");
+        return $producto->fetch_object();
+    }
 
     public function save(){//carga de los datos que vienen por el form
         $sql = "INSERT INTO productos 
@@ -104,13 +108,19 @@ class ProductoModels{
         }
         return $result;
     }
+    public function consultarImagen(){
+        $sql = "SELECT imagen FROM productos WHERE id={$this->id}";
+        $consultaImagen = $this->db->query($sql);
+       /*  $result =false;
+        if($consultaImagen){
+            $result = true;
+        } */
+        return $consultaImagen;
+    }
 
     public function delete(){
+        
         $sql = "DELETE FROM productos WHERE id={$this->id}";
-
-        //$sqlConsulta = "SELECT * FROM productos WHERE id={$this->id}";
-        //$consultaImagen = $this->db->query($sqlConsulta);
-
         $delete = $this->db->query($sql);
 
         $result =false;

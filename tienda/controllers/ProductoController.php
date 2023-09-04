@@ -44,29 +44,34 @@ class productoController{
                 //Guardar la imagen
                 if(isset($_FILES['imagen'])){//validacion
                     $file = $_FILES['imagen'];//imagen que viene del formulario
-                    $filename = $file['name'];
+                    $filename = date("YmdHis").$file['name'];//date("YmdHis"). para guardar la imgen y que no se repita el nombre
                     $mimetype = $file['type']; //tipo de dato so jpg, png, pdf etc
-
+                    
                     if($mimetype == 'image/jpg' || $mimetype== 'image/jpeg' || $mimetype== 'image/png'||  $mimetype== 'image/gif'){
                         if(!is_dir('uploads/images')){
                             mkdir('uploads/images', 0777, true);
                         }
                         $producto->setImagen($filename);
-                        move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
+                        $nombreImagen = $filename;
+                        move_uploaded_file($file['tmp_name'], 'uploads/images/'.$nombreImagen);
                     }
                 }
                 if(isset($_GET['id'])){
                     //editar y guardar en db
                     $id = $_GET['id'];
                     $producto->setId($id);
+                    
+                    /****para borrar el achi anterior que estaba guardado una vez que se cambio la images, si es que paso */
+                    $consulta =  mysqli_fetch_assoc($producto->consultarImagen());//mysqli_fetch_assoc depuera la consulta 
+                    $rutaArchivo = "uploads/images/" . $consulta['imagen'] ;
+                    /******* FIn */
+
                     $save = $producto->edit();
                     //para buscar el nombre y ruta del archivo que quiero borrar.  se cambio la foto pero ahora se borra el anterior
                     //Tamben hay que cambiar los nombre para que no se repita. Sugiero ponerle feca y hora al final del nombre
-                    /* $consulta =  mysqli_fetch_assoc($producto->consultarImagen());//mysqli_fetch_assoc depuera la consulta 
-                    $rutaArchivo = "uploads/images/" . $consulta['imagen'] ;
                     if (file_exists($rutaArchivo)) {
                         unlink($rutaArchivo);
-                    } */
+                    }
                 }else{
                     //Guadar en DB
                     $save = $producto->save();

@@ -13,7 +13,7 @@
         <div id="header">
             <div id="logo">
                 <img src="<?= base_url ?>assets/img/camiseta.png" alt="Camiseta Logo">
-                <a href="index-pphp">
+                <a href="<?= base_url?>">
                     Tienda de camisetas
                 </a>
             </div>
@@ -23,11 +23,11 @@
         <div id="menu">
             <ul>
                 <li>
-                    <a href="#">Inicio</a>
+                    <a href="<?= base_url ?>">Inicio</a>
                 </li>
                 <?php while($cat = $categorias->fetch_object()) : ?> <!-- esto es como un forEach en javascript -->
                     <li>
-                        <a href="#"><?= $cat->nombre ?></a>
+                        <a href="<?= base_url ?>categoria/ver&id=<?= $cat->id?>"><?= $cat->nombre ?></a>
                     </li>
                 <?php endwhile ?>
             </ul>

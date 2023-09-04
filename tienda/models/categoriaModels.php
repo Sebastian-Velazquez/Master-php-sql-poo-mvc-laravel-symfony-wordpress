@@ -18,15 +18,20 @@
         }
 
         function setId($id){
-            $this->nombre = $id;
+            $this->id = $id;
         }
         function setNombre($nombre){
             $this->nombre = $this->db->real_escape_string($nombre);
         }
 
         public function getAll(){
-            $categorias = $this->db->query("SELECT * FROM categorias ORDER BY id DESC");
+            $categorias = $this->db->query("SELECT * FROM categorias ORDER BY id ASC");
             return $categorias;
+        }
+
+        public function getOne(){
+            $categoria = $this->db->query("SELECT * FROM categorias WHERE id = {$this->getId()}");
+            return $categoria->fetch_object(); //fetch_object: para que saque el unico onjeto que puede sacar
         }
 
         public function save(){//carga de los datos que vienen por el form

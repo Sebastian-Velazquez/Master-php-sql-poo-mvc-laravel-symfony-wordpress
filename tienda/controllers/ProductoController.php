@@ -3,6 +3,8 @@ require_once 'models/productoModels.php';
 
 class productoController{
     public function index(){
+        $producto = new ProductoModels; //llama al modelo
+        $productos = $producto->getRamdom(6);
         //echo "Controlador Producto, Accion index";
         require_once 'views/producto/destacados.php';
     }
@@ -54,7 +56,7 @@ class productoController{
                         $producto->setImagen($filename);
                         $nombreImagen = $filename;
                         move_uploaded_file($file['tmp_name'], 'uploads/images/'.$nombreImagen);
-                    }
+                    }///Aca se debe hacer un else para redirigir porque la imagen no tiene el fotmato que se necesita o es un archivo diferente
                 }
                 if(isset($_GET['id'])){
                     //editar y guardar en db
@@ -67,9 +69,11 @@ class productoController{
                     /******* FIn */
 
                     $save = $producto->edit();
+                    /* var_dump($save);
+                    die(); */
                     //para buscar el nombre y ruta del archivo que quiero borrar.  se cambio la foto pero ahora se borra el anterior
                     //Tamben hay que cambiar los nombre para que no se repita. Sugiero ponerle feca y hora al final del nombre
-                    if (file_exists($rutaArchivo)) {
+                    if (file_exists($rutaArchivo) && $save==true ) {
                         unlink($rutaArchivo);
                     }
                 }else{

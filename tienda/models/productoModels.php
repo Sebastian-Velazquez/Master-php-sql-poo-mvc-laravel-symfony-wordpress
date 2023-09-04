@@ -77,7 +77,21 @@ class ProductoModels{
         $productos = $this->db->query("SELECT * FROM productos ORDER BY id DESC");
         return $productos;
     }
-        public function getOne(){
+    public function getAllCategory(){ //AS 'catnombre' se le pone un alias porque el nombre del campo 'nombre' se repute en la tabla categotias y productos
+        $sql = "SELECT p.*, c.nombre AS 'catnombre' FROM productos p "
+                . "INNER JOIN categorias c ON c.id = p.categoria_id "
+                . "WHERE p.categoria_id = {$this->getCategoria_id()} "
+                . "ORDER BY id DESC";
+        $productos = $this->db->query($sql);
+        return $productos;
+    }
+
+    public function getRamdom($limit){
+        $productos = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT $limit ");
+        return $productos;
+    }
+
+    public function getOne(){
         $producto = $this->db->query("SELECT * FROM productos WHERE id={$this->getId()}");
         return $producto->fetch_object();
     }

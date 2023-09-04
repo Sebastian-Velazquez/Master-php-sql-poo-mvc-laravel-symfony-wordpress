@@ -1,5 +1,6 @@
 <?php
     require_once 'models/categoriaModels.php';
+    require_once 'models/productoModels.php';
 class categoriaController{
     public function index(){
         Utils::isAndmin();
@@ -9,6 +10,22 @@ class categoriaController{
         require_once 'views/categoria/index.php';
     }
 
+    public function ver(){
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            //consegir categoria
+            $categoria = new CategoriaModels();
+            $categoria->setId($id);
+            $categoria = $categoria->getOne();
+            //conseguir productos
+            $productos = new ProductoModels();
+            $productos->setCategoria_id($id);
+            $productos = $productos->getAllCategory();
+            
+        }
+        require_once 'views/categoria/ver.php';
+    }
+    
     public function crear(){
         Utils::isAndmin();
         require_once 'views/categoria/crear.php';

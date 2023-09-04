@@ -8,6 +8,19 @@ class productoController{
         //echo "Controlador Producto, Accion index";
         require_once 'views/producto/destacados.php';
     }
+    public function productDetail(){
+            //var_dump($_GET);
+            if(isset($_GET['id'])){
+                $id = $_GET['id'];
+    
+                $producto = new ProductoModels();
+                $producto->setId($id);
+    
+                $product = $producto->getOne();
+    
+            }                    
+        require_once 'views/producto/productDetail.php';
+    }
 
     public function gestion(){
         Utils::isAndmin();

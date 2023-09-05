@@ -31,6 +31,10 @@ class pedidoController{
                 //var_dump($pedido);
                 $save = $pedido->save();
 
+                //Guardar linea pedido
+                $pedido->saveLinea();
+                //Fin de guardar linea
+                
                 if($save){
                     $_SESSION['pedido'] = "complete";
                 }else{

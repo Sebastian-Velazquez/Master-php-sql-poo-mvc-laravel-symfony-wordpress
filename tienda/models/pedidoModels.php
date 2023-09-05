@@ -109,4 +109,23 @@ class PedidoModels{
         }
         return $result;
     }
+
+    public function saveLinea(){
+        $sql = "SELECT LAST_INSERT_ID() as 'pedido;";
+
+        $query = $this->db->query($sql);
+        $pedido_id = $query->fetch_object()->pedido;
+
+        foreach($_SESSION['carrito'] as $indice => $elemento){
+            $producto = $elemento['producto'];
+
+            $insert = "INSERT INTO pedidos VALUES"
+        }
+
+        /* $result =false;
+        if($save){
+            $result = true;
+        }
+        return $result; */
+    }
 }

@@ -79,8 +79,19 @@ class PedidoModels{
     }
 
     public function getOne(){
-        $producto = $this->db->query("SELECT * FROM pedidos WHERE id={$this->getId()}");
+        $producto = $this->db->query("SELECT * FROM pedidos WHERE usuario_id={$this->getId()}");
         return $producto->fetch_object();
+    }
+
+    public function getOneByUser(){
+        $sql = "SELECT p.id, p.coste FROM pedidos p "
+        . "INNER JOIN lineas_pedidos lp ON lp.pedido_id = p.id "
+        . "WHERE p.usuario_id={$this->getUsuario_id()} ORDER BY id DESC LIMIT 1";
+        $pedido = $this->db->query($sql);
+            /* echo $sql;//es para ver el error en el sql que esta mal escrito
+            echo $this->db->error;
+            die(); */
+        return $pedido->fetch_object();
     }
 
     public function save(){//carga de los datos que vienen por el form
@@ -111,21 +122,33 @@ class PedidoModels{
     }
 
     public function saveLinea(){
-        $sql = "SELECT LAST_INSERT_ID() as 'pedido;";
 
-        $query = $this->db->query($sql);
-        $pedido_id = $query->fetch_object()->pedido;
+            $sql = "SELECT LAST_INSERT_ID() as 'pedido';";
 
-        foreach($_SESSION['carrito'] as $indice => $elemento){
-            $producto = $elemento['producto'];
+            $query = $this->db->query($sql);
+            $pedido_id = $query->fetch_object()->pedido;
+    
+            foreach($_SESSION['carrito'] as $indice => $elemento){
+                $producto = $elemento['producto'];
+    
+                $insert = "INSERT INTO lineas_pedidos VALUES(
+                            NULL,
+                            {$pedido_id},
+                            {$producto->id},
+                            {$elemento['unidades']}
+                )";
+                $save = $this->db->query($insert);
+            }
+            /* var_dump($insert);
+            echo $this->db->error;
+            die(); */
 
-            $insert = "INSERT INTO pedidos VALUES"
-        }
-
-        /* $result =false;
-        if($save){
-            $result = true;
-        }
-        return $result; */
+            $result =false;
+            if($save){
+                $result = true;
+            }
+            return $result;
     }
+
+
 }

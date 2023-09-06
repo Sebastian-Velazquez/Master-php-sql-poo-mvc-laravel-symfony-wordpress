@@ -18,7 +18,7 @@
                 <img src="<?= base_url ?>assets/img/camiseta.png" class="img_carrito">
             <?php endif ?>    
             </td>
-            <td><a href="<?= base_url ?>producto/detailProduct&id=<?= $producto->id ?>"><?= $producto->nombre?></td></a>
+            <td><a href="<?= base_url ?>producto/productDetail&id=<?= $producto->id ?>"><?= $producto->nombre?></td></a>
             <td><?= $producto->precio?></td>
             <td><?= $elemento['unidades']?></td>
         </tr>

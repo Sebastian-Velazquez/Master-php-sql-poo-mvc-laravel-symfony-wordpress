@@ -57,6 +57,9 @@ class pedidoController{
             $pedido->setUsuario_id($identity->id);
             $pedido = $pedido->getOneByUser();
 
+            $pedido_productos = new PedidoModels();
+            $productos= $pedido_productos->getProductosByPedido($pedido->id);
+
             require_once 'views/pedido/confirmado.php';
         }
     }

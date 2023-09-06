@@ -9,7 +9,15 @@
         Número de pedido: <?= $pedido->id ?> <br>
         Total a pagar: $ <?= $pedido->coste ?><br>
         Productos: <br>
-    
+        
+        <?php while($producto = $productos->fetch_object()):?>
+            <ul>
+                <li>
+                    <?= $producto->nombre?>
+                </li>
+            </ul>
+        <?php endwhile?>
+
     <?php endif ?>
 <?php elseif (isset($_SESSION['pedido']) && $_SESSION['pedido'] != 'complete') : ?>
     <h1>Tu pedido no se ha confirmado</h1>

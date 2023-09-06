@@ -83,7 +83,7 @@ class pedidoController{
             //sacar datos del pedido
             $pedido = new PedidoModels();
             $pedido->setId($id);
-            $pedido = $pedido->getOne(); 
+            $pedido = $pedido->getOne();
             //sacar los productos
             $pedido_productos = new PedidoModels();
             $productos= $pedido_productos->getProductosByPedido($id);

@@ -1,5 +1,5 @@
 <?php
-// php artisan make:model Image
+// php artisan make:model Image.. Que son las tablas de SQL
 
 namespace App\Models;
 
@@ -18,6 +18,8 @@ class Image extends Model
         return $this->hasMany('App\Like');
     }
     //Relación Muchos a Uno
-
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id'); //user_id es el campo con el cual se va a relacionar
+    }
     use HasFactory;
 }

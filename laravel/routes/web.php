@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//aceder a models de Imagen de Eloquent 
+use App\Models\Image;
 
 Route::get('/', function () {
     echo "Hello World";
     //return view('welcome');
 });
 
-Route::get('/fecha', function () {
-    echo date('d-m-y');
-    //return view('welcome');
-});

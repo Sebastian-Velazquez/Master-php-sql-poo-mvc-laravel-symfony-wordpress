@@ -17,16 +17,30 @@ CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
 --como esta en el $ php artisan migrate
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `id`                bigint(20) UNSIGNED NOT NULL,
+  `role`              varchar(20),
+  `name`              varchar(255) NOT NULL,
+  `email`             varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `password`          varchar(255) NOT NULL,
+  `remember_token`    varchar(100) DEFAULT NULL,
+  `created_at`        timestamp NULL DEFAULT NULL,
+  `updated_at`        timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
---como esta en el $ php artisan migrate
+
+--Juntadndo tablas
+ALTER TABLE `users`
+  ADD `role`            varchar(20),
+  ADD `surname`         varchar(200),
+  ADD `nick`            varchar(100),
+  ADD `image`           varchar(255);
+  ALTER TABLE `users`
+  ADD CONSTRAINT pk_users PRIMARY KEY(id);
+  
+ -- ALTER TABLE `users`
+  --ENGINE=InnoDb;
+
+---Insertando datos 
 INSERT INTO users VALUES(NULL, 'user', 'Víctor', 'Robles', 'victorroblesweb', 'victor@victor.com', 'pass', null, CURTIME(), CURTIME(), NULL);
 INSERT INTO users VALUES(NULL, 'user', 'Juan', 'Lopez', 'juanlopez', 'juan@juan.com', 'pass', null, CURTIME(), CURTIME(), NULL);
 INSERT INTO users VALUES(NULL, 'user', 'Manolo', 'Garcia', 'manologarcia', 'manolo@manolo.com', 'pass', null, CURTIME(), CURTIME(), NULL);

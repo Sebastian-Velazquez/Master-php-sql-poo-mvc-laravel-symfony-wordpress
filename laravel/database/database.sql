@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS laravel_master;
 USE laravel_master;
-
+--como esta en el curso de udemy
 CREATE TABLE IF NOT EXISTS users(
 id              int(255) auto_increment not null,
 role            varchar(20),
@@ -15,7 +15,18 @@ updated_at      datetime,
 remember_token  varchar(255),
 CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
-
+--como esta en el $ php artisan migrate
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+--como esta en el $ php artisan migrate
 INSERT INTO users VALUES(NULL, 'user', 'Víctor', 'Robles', 'victorroblesweb', 'victor@victor.com', 'pass', null, CURTIME(), CURTIME(), NULL);
 INSERT INTO users VALUES(NULL, 'user', 'Juan', 'Lopez', 'juanlopez', 'juan@juan.com', 'pass', null, CURTIME(), CURTIME(), NULL);
 INSERT INTO users VALUES(NULL, 'user', 'Manolo', 'Garcia', 'manologarcia', 'manolo@manolo.com', 'pass', null, CURTIME(), CURTIME(), NULL);

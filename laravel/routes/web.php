@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Image;
 
 Route::get('/', function () {
-    echo "Hello World";
-    //return view('welcome');
+    //echo "Hello World";
+    return view('welcome');
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

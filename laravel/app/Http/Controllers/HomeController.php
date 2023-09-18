@@ -1,5 +1,5 @@
 <?php
-
+//comando para crear un nuevo controlador: php artisan make:controller HomeController
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

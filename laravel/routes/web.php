@@ -26,3 +26,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/configuracion', [App\Http\Controllers\UserController::class, 'config'])->name('config');//config va a ser el nombre que se le pne en las vistas
+
+Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');//config va a ser el nombre que se le pne en las vistas

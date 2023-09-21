@@ -2,18 +2,21 @@
 //php artisan make:controller UserController
 namespace App\Http\Controllers;
 
+//use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 //para de los input
-    use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 //Storage parasubir la imagenes. Es muy distindo a node js
-    use Illuminate\Support\Facades\Storage;
-    use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 class UserController extends Controller
-{//user es la carpeta y config es el arvhi que esta en la carpeta view
-    public function config(){
+{ //user es la carpeta y config es el arvhi que esta en la carpeta view
+    public function config()
+    {
         try {
             $view = view('user.config');
             return $view;
@@ -24,38 +27,39 @@ class UserController extends Controller
     }
 
 
-        public function update(Request $request){
+    public function update(Request $request)
+    {
 
         //conseguir usuario identificado
         $user = Auth::user();
-        
+
         $id = $user->id;
 
         //validacion
         $validate = $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'nick' => ['required', 'string', 'max:255','unique:users,nick,'.$id],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+            'nick' => ['required', 'string', 'max:255', 'unique:users,nick,' . $id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
         ]);
 
         // Subir imagen 
         $image_path = $request->file('image_path');
         /* var_dump($image_path);
         die(); */
-        
-        if($image_path){
+
+        if ($image_path) {
             //poner nombre unico
-            $image_path_name = time().$image_path->getClientOriginalName();//getClientOriginalName para guardar el nombre original
+            $image_path_name = time() . $image_path->getClientOriginalName(); //getClientOriginalName para guardar el nombre original
             //guardar en la carpeta users que esta dentro de la carpeta storage
-            Storage::disk('users')->put($image_path_name , file_get_contents($image_path));
+            Storage::disk('users')->put($image_path_name, file_get_contents($image_path));
 
             //seteo el nombre de la imagen en el objeto. asignar nuevo valores al objeto usuario
             $user->image = $image_path_name;
         }
         // Acceder a los datos validados de forma más concisa
         $userData = $request->only(['name', 'surname', 'nick', 'email']);
-        
+
         //asignar nuevo valores al objeto usuario
         $user->name = $userData['name'];
         $user->surname = $userData['surname'];
@@ -66,7 +70,11 @@ class UserController extends Controller
         $user->update();
 
         return redirect()->route('config')
-                        ->with(['message'=>'Usuario actualizado corectamente']);
+            ->with(['message' => 'Usuario actualizado corectamente']);
+    }
 
+    public function getImage($filename){
+        $file = Storage::disk('users')->get($filename);
+        return new Response($file, 200);
     }
 }

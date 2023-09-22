@@ -81,10 +81,7 @@
                             <label for="image_path" class="col-md-4 col-form-label text-md-end">{{ __('Avatar') }}</label>
 
                             <div class="col-md-6">
-                                @if(Auth::user()->image)
-                            {{-- <img src="{{ url('/user/avatar/'.Auth::user()->image) }}" alt=""> --}} {{-- se puede hacer tambien asi --}}
-                            <img src="{{ route('user.avatar', ['filename'=>Auth::user()->image]) }}" alt="" class="avatar"> {{-- Este es mejor porque no tenemos que cambiar la dirección --}}
-                        @endif
+                                @include('includes.avatar')
                                 <input id="image_path" type="file" class="form-control @error('image_path') is-invalid @enderror" name="image_path"  autocomplete="email">
 
                                 @error('email')

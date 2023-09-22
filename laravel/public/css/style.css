@@ -1,5 +1,16 @@
-.avatar{
+form .avatar{
     width: 40%;
     display: block;
     margin-left: 25%;
+}
+
+.navbar-nav .container-avatar{
+    width: 35px;
+    height: 35px;
+    border-radius: 900px;
+    overflow: hidden;
+    /* border: solid black 1px; */
+}
+.navbar-nav .container-avatar img{
+    height: 100%;
 }

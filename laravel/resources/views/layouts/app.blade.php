@@ -51,8 +51,8 @@
                             @endif
                         @else
                         
-                            <a href="" class="nav-link ">Inicio</a>
-                            <a href="" class="nav-link ">Subir Imagen</a>
+                            <a href="{{ route('home')}}" class="nav-link ">Inicio</a>
+                            <a href="{{ route('imageCreate')}}" class="nav-link ">Subir Imagen</a>
                             <li class="content">
                                 @include('includes.avatar')
                             </li>

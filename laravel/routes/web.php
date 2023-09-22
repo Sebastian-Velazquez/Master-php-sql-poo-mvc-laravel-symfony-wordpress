@@ -27,9 +27,15 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/configuracion', [App\Http\Controllers\UserController::class, 'config'])
-->middleware('auth')//middllwares que no te deja entrar si no estas logueado
-->name('config');//config va a ser el nombre que se le pne en las vistas
-        
-Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');//config va a ser el nombre que se le pne en las vistas
+    ->middleware('auth') //middllwares que no te deja entrar si no estas logueado
+    ->name('config'); //config va a ser el nombre que se le pne en las vistas
+
+Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update'); //config va a ser el nombre que se le pne en las vistas
 
 Route::get('user/avatar/{filename}', [App\Http\Controllers\UserController::class, 'getImage'])->name('user.avatar');//config va a ser el nombre que se le pne en las vistas
+
+Route::get('/subir-imagen', [App\Http\Controllers\ImageController::class , 'create'])
+    ->middleware('auth') //middllwares que no te deja entrar si no estas logueado
+    ->name('imageCreate'); //config va a ser el nombre que se le pne en las vistas
+
+Route::post('/image/save', [App\Http\Controllers\ImageController::class, 'save'])->name('image.save'); //config va a ser el nombre que se le pne en las vistas

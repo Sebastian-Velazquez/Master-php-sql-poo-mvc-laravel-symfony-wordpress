@@ -16,14 +16,20 @@
                         <div class="form-group row">
                             <label for="image_path" class="col-md-4 col-form-label textmd-right">Imagen</label>
                             <div class="col-md-7">
-                                <input type="file" name="image_path" id="image_path" class="form-control" required>
+                                <input type="file" name="image_path" id="image_path" class="form-control"  >
                             </div>
-                            {{-- En laravel hay una variable de error por si falla el formulario --}}
-                            @if($errors->has('image_path'))
+                             <!-- En laravel hay una variable de error por si falla el formulario  -->
+                            @error('image_path')
+                                <span class="" style="color:red" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
+                           <!--  @if($errors->has('image_path'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('image_path')}}</strong>
                             </span>
-                            @endif
+                            @endif -->
                         </div>
 
                         <div class="form-group row">
@@ -32,12 +38,17 @@
                                 <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
                             </div>
 
-                            {{-- En laravel hay una variable de error por si falla el formulario --}}
-                            @if($errors->has('description'))
+                           <!--  En laravel hay una variable de error por si falla el formulario -->
+                            @error('image_path')
+                                <span class="" style="color:red" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <!-- @if($errors->has('description'))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first('description')}}</strong>
                             </span>
-                            @endif
+                            @endif -->
                         </div>
 
                         <div class="form-group row">

@@ -5,19 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
         @include('includes.message')
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+            @foreach($images as $image)
+            <div class="card pub_image">
+                
+                <div class="card-header">
+                    @include('includes.imagePublicado')
+                    {{ $image->user->name.' '.$image->user->surname }}
+                </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -4,13 +4,15 @@ form .avatar{
     margin-left: 25%;
 }
 
-.navbar-nav .container-avatar{
+.navbar-nav .container-avatar,
+.pub_image .container-avatar {
     width: 35px;
     height: 35px;
     border-radius: 900px;
     overflow: hidden;
     /* border: solid black 1px; */
 }
-.navbar-nav .container-avatar img{
+.navbar-nav .container-avatar ,
+.pub_image .container-avatar {
     height: 100%;
 }

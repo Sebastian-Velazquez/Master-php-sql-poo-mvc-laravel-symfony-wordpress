@@ -20,7 +20,7 @@
                             </div>
                              <!-- En laravel hay una variable de error por si falla el formulario  -->
                             @error('image_path')
-                                <span class="" style="color:red" role="alert">
+                                <span class="alert alert-succes" style="color:red" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -40,7 +40,7 @@
 
                            <!--  En laravel hay una variable de error por si falla el formulario -->
                             @error('image_path')
-                                <span class="" style="color:red" role="alert">
+                                <span class="alert alert-succes" style="color:red" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

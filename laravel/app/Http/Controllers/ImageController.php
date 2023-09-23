@@ -48,9 +48,8 @@ class ImageController extends Controller
         //Guardar en DB
         $image->save();
 
-        return redirect()->route('home')->with([
-            'message' => 'La foto fue guardado correctamente'
-        ]);
+        return redirect()->route('home')
+            ->with(['message' => 'La foto fue guardado correctamente']);
     }
 
 }

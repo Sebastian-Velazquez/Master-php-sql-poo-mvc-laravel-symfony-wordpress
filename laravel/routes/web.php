@@ -39,3 +39,6 @@ Route::get('/subir-imagen', [App\Http\Controllers\ImageController::class , 'crea
     ->name('imageCreate'); //config va a ser el nombre que se le pne en las vistas
 
 Route::post('/image/save', [App\Http\Controllers\ImageController::class, 'save'])->name('image.save'); //config va a ser el nombre que se le pne en las vistas
+
+//Image publicado
+Route::get('image/file/{filename}', [App\Http\Controllers\ImageController::class, 'getImage'])->name('image.file');//config va a ser el nombre que se le pne en las vistas

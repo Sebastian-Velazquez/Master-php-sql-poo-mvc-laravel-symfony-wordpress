@@ -57,4 +57,12 @@ class ImageController extends Controller
         $file = Storage::disk('images')->get($filename);
         return new Response($file, 200);
     }
+
+    //Ruta para detalle de Imagen o publicaión
+    public function detail($id){
+        $image = Image::find($id);
+        return view('image.detail',[
+            'image' => $image
+        ]);
+    }
 }

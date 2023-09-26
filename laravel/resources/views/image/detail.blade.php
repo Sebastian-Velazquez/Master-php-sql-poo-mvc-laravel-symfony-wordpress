@@ -3,9 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
         @include('includes.message')
-            @foreach($images as $image)
             <div class="card pub_image">
                 
                 <div class="card-header">
@@ -34,13 +33,8 @@
                     </a>
                 </div>
             </div>
-            @endforeach
         </div>
-        {{-- Paginacion --}}
-        <div class="clearfix">
-            
-            {{$images->links()}}
-        </div>
+
     </div>
 </div>
 @endsection

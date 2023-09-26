@@ -42,3 +42,6 @@ Route::post('/image/save', [App\Http\Controllers\ImageController::class, 'save']
 
 //Image publicado
 Route::get('image/file/{filename}', [App\Http\Controllers\ImageController::class, 'getImage'])->name('image.file');//config va a ser el nombre que se le pne en las vistas
+
+//ruta para ir a detalle de imagen
+Route::get('imagen/{id}', [App\Http\Controllers\ImageController::class, 'detail'])->name('image.detail');//config va a ser el nombre que se le pne en las vistas

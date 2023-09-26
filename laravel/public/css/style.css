@@ -37,4 +37,18 @@ form .avatar{
 }
 .pub_image .description{
     padding: 20px;
+    padding-bottom: 0;
+}
+.pub_image .btn-comments{
+    margin: 20px;
+    margin-top: 0;
+    margin-left: 0;
+}
+.likes{
+    float: left;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.likes img{
+    width: 20px;
 }

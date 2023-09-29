@@ -9,11 +9,13 @@
             <div class="card pub_image">
                 
                 <div class="card-header">
-                    @include('includes.imagePublicado')
-                    {{ $image->user->name.' '.$image->user->surname}}
-                    <span class="nickname">
-                        {{' | @'.$image->user->nick }}
-                    </span>
+                    <a href="{{ route('image.detail', ['id' => $image->id])}}">
+                        @include('includes.imagePublicado')
+                        {{ $image->user->name.' '.$image->user->surname}}
+                        <span class="nickname">
+                            {{' | @'.$image->user->nick }}
+                        </span>
+                    </a>
                 </div>
 
                 <div class="card-body"> 
@@ -23,6 +25,7 @@
                     
                     <div class="description">
                         <span calss="nickname">{{ '@'.$image->user->nick}}</span>
+                        <span calss="nickname date">{{' | '.$image->created_at}}</span>
                         <p>{{ $image->description}}</p> 
                     </div>
                     <div class="likes">

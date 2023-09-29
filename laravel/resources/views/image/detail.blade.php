@@ -7,7 +7,7 @@
         @include('includes.message')
             <div class="card pub_image">
                 
-                <div class="card-header">
+                <div class="card-header" style="color: #4e4f50">
                     @include('includes.imagePublicado')
                     {{ $image->user->name.' '.$image->user->surname}}
                     <span class="nickname">

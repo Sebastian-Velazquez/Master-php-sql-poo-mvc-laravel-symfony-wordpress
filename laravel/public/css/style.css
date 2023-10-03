@@ -31,7 +31,9 @@ form .avatar{
 .image-container img{
     width: 100%;
 }
-
+.image-detail{
+    max-height: 500px;
+}
 .pub_image .card-body{
     padding: 0;
 }
@@ -47,8 +49,11 @@ form .avatar{
 .likes{
     float: left;
     padding-left: 20px;
-    padding-right: 10px;
+    padding-right: 10px ;
 }
 .likes img{
     width: 20px;
+}
+.pub_image .comments{
+    padding: 20px;
 }

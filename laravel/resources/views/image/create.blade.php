@@ -39,7 +39,7 @@
                             </div>
 
                            <!--  En laravel hay una variable de error por si falla el formulario -->
-                            @error('image_path')
+                            @error('description')
                                 <span class="alert alert-succes" style="color:red" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

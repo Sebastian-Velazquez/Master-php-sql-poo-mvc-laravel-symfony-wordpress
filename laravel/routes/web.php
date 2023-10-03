@@ -45,3 +45,6 @@ Route::get('image/file/{filename}', [App\Http\Controllers\ImageController::class
 
 //ruta para ir a detalle de imagen
 Route::get('imagen/{id}', [App\Http\Controllers\ImageController::class, 'detail'])->name('image.detail');//config va a ser el nombre que se le pne en las vistas
+
+//Guardar comentarios
+Route::post('/comment/save', [App\Http\Controllers\CommentController::class, 'save'])->name('comment.save'); //config va a ser el nombre que se le pne en las vistas

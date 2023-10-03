@@ -25,7 +25,7 @@
                     
                     <div class="description">
                         <span calss="nickname">{{ '@'.$image->user->nick}}</span>
-                        <span calss="nickname date">{{' | '.$image->created_at}}</span>
+                        <span calss="nickname date">{{' | '.\FormatTime::longTimeFilter( $image->created_at)}}</span>
                         <p>{{ $image->description}}</p> 
                     </div>
                     <div class="likes">

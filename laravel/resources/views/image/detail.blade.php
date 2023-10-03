@@ -22,6 +22,7 @@
                     
                     <div class="description">
                         <span calss="nickname">{{ '@'.$image->user->nick}}</span>
+                        <span calss="nickname date">{{' | '.\FormatTime::longTimeFilter( $image->created_at)}}</span>
                         <p>{{ $image->description}}</p> 
                     </div>
                     <div class="clearfix"></div>
@@ -42,7 +43,7 @@
                             @enderror
 
                             <p>
-                                <textarea name="content" id="" cols="5" rows="3" class="form-control" ></textarea>
+                                <textarea name="content" id="" cols="5" rows="3" class="form-control {{$errors->has('content') ? 'is-invalid' : '' }}" ></textarea>
                             </p>
 
                             @error('content')
@@ -50,9 +51,25 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-
+                                <br>
                             <button type="submit" class="btn btn-success">Enviar</button>
                         </form>
+                        <hr>
+                        @foreach ($image->comments as $comment)
+                            <div class="comment">
+                                <div class="description">
+                                    <span calss="nickname">{{ '@'.$comment->user->nick}}</span>
+                                    <span calss="nickname date">{{' | '.\FormatTime::longTimeFilter( $comment->created_at)}}</span>
+                                    <p>{{ $comment->content}} <br>
+                                    @if (Auth::check() && ($comment->user_id = Auth::user()->id || $comment->image->user_id == Auth::user()->id))
+                                        <a href="{{ route('comment.delete', ['id' => $comment->id ]) }}" class="btn btn-sm btn-danger">
+                                            Eliminar
+                                        </a> 
+                                    @endif
+                                </p>
+                                </div>
+                            </div>
+                        @endforeach
                 </div>
             </div>
         </div>

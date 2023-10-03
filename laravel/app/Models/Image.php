@@ -11,7 +11,7 @@ class Image extends Model
     protected $table = 'images';
     //Relación One To Many
     public function comments(){
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment')->orderBy('id', 'desc');
     }
     //Relación One To Many
     public function likes(){

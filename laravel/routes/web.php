@@ -48,3 +48,6 @@ Route::get('imagen/{id}', [App\Http\Controllers\ImageController::class, 'detail'
 
 //Guardar comentarios
 Route::post('/comment/save', [App\Http\Controllers\CommentController::class, 'save'])->name('comment.save'); //config va a ser el nombre que se le pne en las vistas
+
+//Eliminar comentario
+Route::get('comment/delete/{id}', [App\Http\Controllers\CommentController::class, 'delete'])->name('comment.delete');//config va a ser el nombre que se le pne en las vistas

@@ -29,8 +29,23 @@
                         <p>{{ $image->description}}</p> 
                     </div>
                     <div class="likes">
-                        <i class="fa-solid fa-heart" style="color: #a80000;"></i> 
-                        <i class="fa-regular fa-heart" style="color: #4e4f50;display: none;"  ></i>
+                        
+                        {{-- Comprobar si el usuario le dio like a la imagen --}}
+                        <?php $user_like = false; ?>
+                        @foreach ($image->likes as $like)
+                            @if ($like->user->id == Auth::user()->id )
+                                <?php $user_like = true; ?>
+                            @endif
+                        @endforeach
+
+                        @if ($user_like)
+                            <i class="fa-solid fa-heart btn-like" style="color: #a80000;"></i> 
+                        @else
+                            <i class="fa-regular fa-heart btn-dislike" style="color: #4e4f50;"  ></i>
+                        @endif
+                        <span class="number_likes">
+                            {{ count($image->likes)}}
+                        </span>
                     </div>
                     <a href="" class="btn btn-sm btn-warning btn-comments">
                         Comentario ({{count($image->comments)}})

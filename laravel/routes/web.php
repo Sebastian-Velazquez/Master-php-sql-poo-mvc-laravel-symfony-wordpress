@@ -51,3 +51,9 @@ Route::post('/comment/save', [App\Http\Controllers\CommentController::class, 'sa
 
 //Eliminar comentario
 Route::get('comment/delete/{id}', [App\Http\Controllers\CommentController::class, 'delete'])->name('comment.delete');//config va a ser el nombre que se le pne en las vistas
+
+//like
+Route::get('/like/{image_id}', [App\Http\Controllers\LikeController::class, 'like'])->name('like.save'); //config va a ser el nombre que se le pne en las vistas
+
+//dislike
+Route::get('/dislike/{image_id}', [App\Http\Controllers\LikeController::class, 'dislike'])->name('like.delete'); //config va a ser el nombre que se le pne en las vistas

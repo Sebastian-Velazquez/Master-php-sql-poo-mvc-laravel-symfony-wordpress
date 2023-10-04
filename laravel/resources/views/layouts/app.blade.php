@@ -9,12 +9,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <script src="https://kit.fontawesome.com/aef00d3210.js" crossorigin="anonymous"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="{{asset('js/main.js')}}" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">

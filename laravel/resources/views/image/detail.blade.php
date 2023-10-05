@@ -26,10 +26,7 @@
                         <p>{{ $image->description}}</p> 
                     </div>
                     <div class="clearfix"></div>
-                    <div class="likes">
-                        <i class="fa-solid fa-heart" style="color: #a80000;"></i> 
-                        <i class="fa-regular fa-heart" style="color: #4e4f50"  ></i>
-                    </div>
+                    @include('includes.heartIcono')
                         <h2>Comentario ({{count($image->comments)}})</h2>
                         <hr>
                         <form action="{{ route('comment.save') }}" method="post">

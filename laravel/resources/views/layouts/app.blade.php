@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- js/main --}}
     <script src="{{asset('js/main.js')}}" crossorigin="anonymous"></script>
+    {{-- js/main --}}
 </head>
 <body>
     <div id="app">

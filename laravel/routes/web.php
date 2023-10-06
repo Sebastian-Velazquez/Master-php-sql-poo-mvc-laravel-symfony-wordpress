@@ -57,3 +57,6 @@ Route::get('/like/{image_id}', [App\Http\Controllers\LikeController::class, 'lik
 
 //dislike
 Route::get('/dislike/{image_id}', [App\Http\Controllers\LikeController::class, 'dislike'])->name('like.delete'); //config va a ser el nombre que se le pne en las vistas
+
+//Lista de likes
+Route::get('/likes', [App\Http\Controllers\LikeController::class, 'likesList'])->name('likes.list'); //config va a ser el nombre que se le pne en las vistas

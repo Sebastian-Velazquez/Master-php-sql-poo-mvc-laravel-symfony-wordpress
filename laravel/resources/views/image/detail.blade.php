@@ -8,7 +8,13 @@
             <div class="card pub_image pub_image_detail">
                 
                 <div class="card-header" style="color: #4e4f50">
-                    @include('includes.imagePublicado')
+                    @if($image->user->image)
+                        <div class="container-avatar" > 
+                            <img src="{{ url('/user/avatar/'.Auth::user()->image) }}" alt=""> {{-- se puede hacer tambien asi --}}
+                        
+                            <img src="{{ route('user.avatar', ['filename'=>$image->user->image]) }}" alt="" class="avatar"> {{-- Este es mejor porque no tenemos que cambiar la dirección --}}
+                        </div>
+                    @endif 
                     {{ $image->user->name.' '.$image->user->surname}}
                     <span class="nickname">
                         {{' | @'.$image->user->nick }}
@@ -26,7 +32,20 @@
                         <p>{{ $image->description}}</p> 
                     </div>
                     <div class="clearfix"></div>
-                    @include('includes.heartIcono')
+                    <div class="likes">
+                            
+                        {{-- Comprobar si el usuario le dio like a la imagen --}}
+                        <?php $user_like = false; ?>
+                        @foreach ($image->likes as $like)
+                            @if ($like->user->id == Auth::user()->id )
+                                <?php $user_like = true; ?>
+                            @endif
+                        @endforeach
+
+                        @include('includes.heartIcono')
+                            {{ count($image->likes)}}
+                        </span>
+                    </div>
                         <h2>Comentario ({{count($image->comments)}})</h2>
                         <hr>
                         <form action="{{ route('comment.save') }}" method="post">

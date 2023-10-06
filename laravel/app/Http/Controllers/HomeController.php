@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
        //$images = Image::orderBy('id', 'desc')->get(); //usamos ORM // sin el get() no se ejecuta la consulta
         //puedo unsar Image::All() pero no se orderia. Y no es necesario usar el get()
-        $images = Image::orderBy('id', 'desc')->simplePaginate(2);//para hacer ppaginación
+        $images = Image::orderBy('id', 'desc')->simplePaginate(5);//para hacer paginación
 
         return view('home', [ 
             'images' => $images

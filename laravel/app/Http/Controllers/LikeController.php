@@ -29,11 +29,12 @@ class LikeController extends Controller
             $like->save();
     
             return response()->json([
-                'like' => $like
+                'like' => $like,
+                'message' => 'Has dado like correctamenteAAA'
             ]);
         }else{
             return response()->json([
-                'message' => 'El like ya existe'
+                'message' => 'El like ya existeAAA'
             ]);
         }
 
@@ -43,15 +44,15 @@ class LikeController extends Controller
         $user = \Auth::user();
         
         //condicion si el like ya existe y no duplicarlo
-        $like = Like::where('user_id', $user->id)
+        $deslike = Like::where('user_id', $user->id)
                             ->where('image_id', $image_id)//es otra consulta
                             ->first();//recoge un solo dato
-        if ($like) {
+        if ($deslike) {
             //guardar
-            $like->delete();
+            $deslike->delete();
     
             return response()->json([
-                'like' => $like,
+                'deslike' => $deslike,
                 'message' => 'Has dado dislike correctamente'
             ]);
         }else{

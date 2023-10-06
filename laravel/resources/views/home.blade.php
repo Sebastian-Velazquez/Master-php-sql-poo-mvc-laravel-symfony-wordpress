@@ -41,12 +41,6 @@
 
                             @include('includes.heartIcono')
 
-                            {{-- @if ($user_like)
-                                <i class="fa-solid fa-heart btn-like" style="color: #a80000;"></i> 
-                            @else
-                                <i class="fa-regular fa-heart btn-dislike" style="color: #4e4f50;"  ></i>
-                            @endif
-                            <span class="number_likes"> --}}
                                 {{ count($image->likes)}}
                             </span>
                         </div>

@@ -1,23 +1,13 @@
-{{-- @if($image->user->image)
-    <div class="container-avatar" > --}}
-        {{-- <img src="{{ url('/user/avatar/'.Auth::user()->image) }}" alt=""> --}} {{-- se puede hacer tambien asi --}}
-    
-        {{-- <img src="{{ route('user.avatar', ['filename'=>$image->user->image]) }}" alt="" class="avatar"> --}} {{-- Este es mejor porque no tenemos que cambiar la dirección --}}
-   {{--  </div>
-@endif --}}
-
-
 <div class="card pub_image">
                     
     <div class="card-header">
-        <a href="{{ route('image.detail', ['id' => $image->id])}}">
+        <a href="{{ route('profile', ['id' => $image->user->id])}}">
             @if($image->user->image)
-    <div class="container-avatar" >
-        {{-- <img src="{{ url('/user/avatar/'.Auth::user()->image) }}" alt=""> --}} {{-- se puede hacer tambien asi --}}
-    
-        <img src="{{ route('user.avatar', ['filename'=>$image->user->image]) }}" alt="" class="avatar"> {{-- Este es mejor porque no tenemos que cambiar la dirección --}}
-    </div>
-@endif
+                <div class="container-avatar" >
+                    {{-- <img src="{{ url('/user/avatar/'.Auth::user()->image) }}" alt=""> --}} {{-- se puede hacer tambien asi --}}
+                    <img src="{{ route('user.avatar', ['filename'=>$image->user->image]) }}" alt="" class="avatar"> {{-- Este es mejor porque no tenemos que cambiar la dirección --}}
+                </div>
+            @endif
             {{ $image->user->name.' '.$image->user->surname}}
             <span class="nickname">
                 {{' | @'.$image->user->nick }}
@@ -49,7 +39,7 @@
                 {{ count($image->likes)}}
             </span>
         </div>
-        <a href="" class="btn btn-sm btn-warning btn-comments">
+        <a href="{{ route('image.detail', ['id' => $image->id])}}" class="btn btn-sm btn-warning btn-comments">
             Comentario ({{count($image->comments)}})
         </a>
     </div>

@@ -16,15 +16,15 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     //echo "Hello World";
     return view('welcome');
-});
+}); */
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/configuracion', [App\Http\Controllers\UserController::class, 'config'])
     ->middleware('auth') //middllwares que no te deja entrar si no estas logueado
@@ -60,3 +60,8 @@ Route::get('/dislike/{image_id}', [App\Http\Controllers\LikeController::class, '
 
 //Lista de likes
 Route::get('/likes', [App\Http\Controllers\LikeController::class, 'likesList'])->name('likes.list'); //config va a ser el nombre que se le pne en las vistas
+
+//Profile
+Route::get('/profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])
+                        ->middleware('auth')    
+                        ->name('profile'); //config va a ser el nombre que se le pne en las vistas

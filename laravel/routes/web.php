@@ -65,3 +65,6 @@ Route::get('/likes', [App\Http\Controllers\LikeController::class, 'likesList'])-
 Route::get('/profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])
                         ->middleware('auth')    
                         ->name('profile'); //config va a ser el nombre que se le pne en las vistas
+
+//Eliminar comentario
+Route::get('image/delete/{id}', [App\Http\Controllers\ImageController::class, 'delete'])->name('image.delete');//config va a ser el nombre que se le pne en las vistas

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 
+//NEcesito parrar borrar la imagen todos las datos relacionadas a esa imagen en otras tabals
+use App\Models\Comment;
+use App\Models\Like;
+use Illuminate\Support\Arr;
+
 class ImageController extends Controller
 {
     //Middlewares
@@ -64,5 +69,40 @@ class ImageController extends Controller
         return view('image.detail',[
             'image' => $image
         ]);
+    }
+
+    //eleiminar imagen
+    public function delete($id){
+        $user = \Auth::user();
+        $image = Image::find($id);
+        //buscar comentario para borrar antes que la imagen
+        $comments = Comment::where('image_id', $id)->get();
+        //buscar likes para borrar antes que la imagen
+        $likes = Like::where('image_id', $id)->get();
+
+        if ($user && $image && $image->user->id == $user->id) {
+            //elimino comentarios
+            if ($comments && count($comments) >=1) {
+                foreach ($comments as $comment) {
+                    $comment->delete();
+                }
+            }
+            //elimino los likes
+            if ($likes && count($likes) >=1) {
+                foreach ($likes as $like) {
+                    $like->delete();
+                }
+            }
+            //elimino fichero de la imagen
+            Storage::disk('images')->delete($image->image_path); //image_path es como se llama el campo de la msql
+            //elimino el regstro de la imagen
+            $image->delete();
+            return redirect()->route('home')
+                    ->with(['message' => 'La imagen se a borrado correctamente']);
+        }else{
+        return redirect()->route('home')
+        ->with(['message' => 'La imagen no se a borrado correctamente']);
+        }
+        return redirect()->route('home');
     }
 }

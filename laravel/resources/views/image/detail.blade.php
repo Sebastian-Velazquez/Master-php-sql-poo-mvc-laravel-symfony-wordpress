@@ -46,6 +46,13 @@
                             {{ count($image->likes)}}
                         </span>
                     </div>
+                    
+                    @if (Auth::user() && Auth::user()->id == $image->user->id)
+                        <div class="action">
+                            <a href="" class="btn btn-sm btn-primary">Actualizar</a>
+                            <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-sm btn-danger">Borrar</a>
+                        </div>
+                    @endif
                         <h2>Comentario ({{count($image->comments)}})</h2>
                         <hr>
                         <form action="{{ route('comment.save') }}" method="post">

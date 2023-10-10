@@ -68,3 +68,9 @@ Route::get('/profile/{id}', [App\Http\Controllers\UserController::class, 'profil
 
 //Eliminar comentario
 Route::get('image/delete/{id}', [App\Http\Controllers\ImageController::class, 'delete'])->name('image.delete');//config va a ser el nombre que se le pne en las vistas
+
+//Editar imagen Vista
+Route::get('editar/{id}', [App\Http\Controllers\ImageController::class, 'edit'])->name('image.edit');//config va a ser el nombre que se le pne en las vistas
+
+//Procesar edición de imagen
+Route::post('update', [App\Http\Controllers\ImageController::class, 'update'])->name('image.update');//config va a ser el nombre que se le pne en las vistas

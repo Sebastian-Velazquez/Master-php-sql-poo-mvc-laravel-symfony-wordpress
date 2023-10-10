@@ -49,8 +49,35 @@
                     
                     @if (Auth::user() && Auth::user()->id == $image->user->id)
                         <div class="action">
-                            <a href="" class="btn btn-sm btn-primary">Actualizar</a>
-                            <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-sm btn-danger">Borrar</a>
+                            <a href="{{ route('image.edit', ['id' => $image->id])}}" class="btn btn-sm btn-primary">Actualizar</a>
+                            {{-- <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-sm btn-danger">Borrar</a> --}}
+                            
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Eliminar
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar!!</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Estas seguro que quieres borrar esta imagen: <br>
+                                    <img src="{{ route('image.file',['filename'=>$image->image_path])}}" alt="" style="height: 70px">
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <a href="{{ route('image.delete', ['id' => $image->id]) }}" class="btn btn-danger">Si</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- Fin Button trigger modal -->
+
                         </div>
                     @endif
                         <h2>Comentario ({{count($image->comments)}})</h2>

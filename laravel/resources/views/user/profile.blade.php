@@ -18,8 +18,8 @@
                     <p>{{'Se unió: '.\FormatTime::longTimeFilter( $user->created_at)}}</p>
                 </div>
                 
-            <div class="clearfix"></div>{{--  Es para que lo de abajo no se adapte al css de arriba --}}
-            <hr>
+                <div class="clearfix"></div>{{--  Es para que lo de abajo no se adapte al css de arriba --}}
+                <hr>
             </div>
 
             <div class="clearfix"></div>{{--  Es para que lo de abajo no se adapte al css de arriba --}}

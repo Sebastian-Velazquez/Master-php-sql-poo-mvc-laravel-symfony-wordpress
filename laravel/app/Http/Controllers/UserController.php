@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
 class UserController extends Controller
-{ //user es la carpeta y config es el arvhi que esta en la carpeta view
+{
+
+
+    //user es la carpeta y config es el arvhi que esta en la carpeta view
     public function config()
     {
         try {
@@ -30,14 +33,10 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request)
-    {
-
+    public function update(Request $request){
         //conseguir usuario identificado
         $user = Auth::user();
-
         $id = $user->id;
-
         //validacion
         $validate = $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
@@ -87,4 +86,21 @@ class UserController extends Controller
             'user' => $user
         ]);
     }
+        //lista de usuarios
+        public function index($search = null){
+            if (!empty($search)) {
+                $users = User::where('nick', 'LIKE', '%'.$search.'%')
+                                ->orwhere('name', 'LIKE', '%'.$search.'%')
+                                ->orwhere('surname', 'LIKE', '%'.$search.'%')
+                                ->orderBy('id', 'desc')
+                                ->paginate(5);
+            } else {
+                $users = User::orderBy('id', 'desc')->paginate(2);
+            }
+            
+    
+            return view('user.index', [
+                'users' => $users
+            ]);
+        }
 }

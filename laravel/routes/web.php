@@ -74,3 +74,6 @@ Route::get('editar/{id}', [App\Http\Controllers\ImageController::class, 'edit'])
 
 //Procesar edición de imagen
 Route::post('update', [App\Http\Controllers\ImageController::class, 'update'])->name('image.update');//config va a ser el nombre que se le pne en las vistas
+
+//Ruta de lista de usuarios
+Route::get('gente/{search?}', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');//search? : el signo de pregunta es porque puede o no pedirse el seach

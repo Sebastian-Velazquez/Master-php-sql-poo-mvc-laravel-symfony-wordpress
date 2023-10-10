@@ -56,6 +56,7 @@
                         @else
                         
                             <a href="{{ route('home')}}" class="nav-link ">Inicio</a>
+                            <a href="{{ route('user.index')}}" class="nav-link ">Gente</a>
                             <a href="{{ route('likes.list')}}" class="nav-link ">Favoritas</a>
                             <a href="{{ route('imageCreate')}}" class="nav-link ">Subir Imagen</a>
                             <li class="content">
